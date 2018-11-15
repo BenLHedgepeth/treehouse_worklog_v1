@@ -44,6 +44,7 @@ class WorkLog:
 				self.delete_entry()
 
 			else:
+				clear_screen()
 				sys.exit()
 
 	def search_entries(self):
@@ -237,12 +238,14 @@ class WorkLog:
 
 		while True:
 
+			search_item = "regular expression"
+
 			log_entries = compile_log()
 
-			pattern = input(r"Provide a string pattern to match up entries in the work log:\n\n>>> ")
+			pattern = input(r"Provide a regular expression pattern to match up entries in the work log: ")
 
 			while not pattern:
-				pattern = input(r"Sorry. The pattern provided is not accepted:\n\n>>> ")
+				pattern = input(r"Sorry. The pattern provided is not accepted: ")
 
 			re_pattern = re.compile(pattern)
 
