@@ -4,10 +4,11 @@ import os
 
 def display_results(results_list, category):
 	clear_screen()
-
-	print('{matches} tasks were matched:\n'.format(matches=str(len(results_list))))
-
+	
 	for i, unique_entry in enumerate(results_list):
+
+		print('{matches} tasks were matched:\n'.format(matches=str(len(results_list))))
+		
 		print('*' * 10, "Entry #", str(i + 1), 'of', str(len(results_list)), '*' * 10)
 	
 		print_result = '''
@@ -35,6 +36,7 @@ def display_results(results_list, category):
 			return True # return to 'search_entries'
 		
 		else:
+			clear_screen()
 			continue
 
 def compile_log():
