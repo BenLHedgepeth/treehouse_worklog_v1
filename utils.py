@@ -14,7 +14,7 @@ def display_results(results_list, category):
 	Task : {task}
 	Date of Task : {date}
 	Note : {details}
-	Minutes : {minutes}
+	Time : {time}
 		'''.format(**unique_entry)
 		print(print_result)
 		
@@ -41,7 +41,7 @@ def compile_log():
 
 	with open('worklog_entries.csv', 'r') as read_csv_rows:
 
-		fieldnames = ["date", "task", "details", "minutes"]
+		fieldnames = ["date", "task", "details", "time"]
 
 		date_entries = csv.DictReader(read_csv_rows, fieldnames=fieldnames)
 		next(date_entries, None) #skips the first line of the csv; header
@@ -74,13 +74,13 @@ def clear_screen():
 def write_entry(dict_object):
 
 	with open('worklog_entries.csv', 'a', newline='\n') as write_entries:
-		fieldnames = ["date", "task", "details", "minutes"]
+		fieldnames = ["date", "task", "details", "time"]
 
 		logger = csv.DictWriter(write_entries, fieldnames=fieldnames)
 
 		table_date = dict_object['date'].strftime('%Y-%m-%d')
-		table_time = dict_object['minutes'].strftime('%H:%M')
-		dict_object.update(date=table_date, minutes=table_time)
+		table_time = dict_object['time'].strftime('%H:%M')
+		dict_object.update(date=table_date, time=table_time)
 		
 		logger.writerow(dict_object)
 

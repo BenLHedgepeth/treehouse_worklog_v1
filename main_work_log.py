@@ -174,8 +174,16 @@ class WorkLog:
 			clear_screen()
 
 			search_item = "time"
-			start_date = date_origin - datetime.timedelta(days=date_margin)
-			end_date = date_origin + datetime.timedelta(days=date_margin)
+
+			try:
+				start_date = date_origin - datetime.timedelta(days=date_margin)	
+			except OverflowError:
+				start_date = datetime.date(year=1, month=1, day=1)
+		
+			try:
+				end_date = date_origin + datetime.timedelta(days=date_margin)
+			except OverflowError:
+				end_date = datetime.date(year=9999, month=12, day=31)
 				
 			dates_wanted = []
 
@@ -288,27 +296,27 @@ class WorkLog:
 				else:
 					break
 
-			minutes_tasked = []
+			time_tasked = []
 
 			for t_entry in log_details:
-				minutes_logged =  datetime.datetime.strptime(t_entry['minutes'], "%H:%M").time() # a datetime time object 
+				time_logged =  datetime.datetime.strptime(t_entry['time'], "%H:%M").time() # a time object 
 
-				if minutes_logged.hour >= 1:
-					total_task_minutes = (60 * minutes_logged.hour) + minutes_logged.minute
+				if time_logged.hour >= 1:
+					total_task_minutes = (60 * time_logged.hour) + time_logged.minute
 				else:
-					total_task_minutes = minutes_logged.minute
+					total_task_minutes = time_logged.minute
 
 				if minutes_criteria == total_task_minutes:
-					minutes_tasked.append(t_entry)
+					time_tasked.append(t_entry)
 
-			if not minutes_tasked:
+			if not time_tasked:
 				empty_results = no_results(search_item)
 
 				if empty_results:
 					continue # prompt for a new time input if 0 results are generated from the previous time
 				break # prompt the user for a new search; N - Main Menu; Y - Search Menu
 			else:
-				timing_results = display_results(minutes_tasked, search_item) # iterates over the entries that meet user's criteria
+				timing_results = display_results(time_tasked, search_item) # iterates over the entries that meet user's criteria
 
 				if not timing_results or timing_results:
 					break # prompt the user for a new search; N - Main Menu; Y - Search Menu

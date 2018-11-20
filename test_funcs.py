@@ -7,7 +7,7 @@ from utils import compile_log, clear_screen
 def test_duplicate_entry(dict_object):
 	# Iterate over a .csv file for any duplicate worklog entries
 	log_length = compile_log()
-	fieldnames = ["date", "task", "details", "minutes"]
+	fieldnames = ["date", "task", "details", "time"]
 
 	with open('worklog_entries.csv', 'a') as table:
 		if len(log_length) == 0:

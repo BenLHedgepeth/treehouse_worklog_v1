@@ -12,7 +12,7 @@ class Task:
 		self.task = self.store_task()
 		self.date = self.store_date()
 		self.details = self.store_task_details()
-		self.minutes = self.store_time()
+		self.time = self.store_time()
 
 	def __str__(self):
 		string_date = self.date.strftime('%Y-%m-%d')
@@ -44,7 +44,7 @@ class Task:
 			return self.store_date()
 		else:
 			# return official_date
-			return accept_date	
+			return accept_date	# datetime object
 
 	def store_task_details(self):
 		'''Record any relevant information about the task'''
