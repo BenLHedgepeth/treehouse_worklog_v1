@@ -1,12 +1,9 @@
 import datetime
 import re
 
-from itertools import count
 from test_funcs import test_date_format, test_time_format
 
 class Task:
-
-	NUM_TASKS = count(0)
 
 	def __init__(self):
 		self.task = self.store_task()
